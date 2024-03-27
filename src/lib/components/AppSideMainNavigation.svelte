@@ -8,7 +8,7 @@
 		menuOpen = !menuOpen;
 
 		// close the navigation menu
-		let navigation = document.getElementById('site-main-side-navigation');
+		let navigation = document.getElementById('app-side-main-navigation');
 		let emptyPlaceholder = document.querySelector('.empty-placeholder');
 		if (menuOpen == true) {
 			navigation.classList.add('visible');
@@ -21,7 +21,7 @@
 	};
 </script>
 
-<nav id="site-main-side-navigation">
+<nav id="app-side-main-navigation">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="nav-link-disabled">
 		<div class="empty-placeholder" style="display:none;">&nbsp;</div>
@@ -70,6 +70,62 @@
 </nav>
 
 <style>
+	@media (max-width: 576px) {
+		#app-side-main-navigation {
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			align-items: center;
+			height: max-content;
+			width: 100%;
+			max-width: max-content;
+			overflow-x: auto;
+			overflow-y: hidden;
+			box-shadow:
+				inset 12px 0px 10px -5px rgba(0, 0, 0, 0.5),
+				inset -12px 0px 10px -5px rgba(0, 0, 0, 0.5);
+		}
+
+		/* Hide scrollbar for Chrome, Safari and Opera */
+		:global(#app-side-main-navigation::-webkit-scrollbar) {
+			display: none;
+		}
+
+		/* Hide scrollbar for IE, Edge and Firefox */
+		:global(#app-side-main-navigation) {
+			-ms-overflow-style: none; /* IE and Edge */
+			scrollbar-width: none; /* Firefox */
+		}
+		.nav-link {
+			border-bottom: none !important;
+			border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+		}
+		/* ===== Scrollbar CSS ===== */
+		/* Firefox */
+		/* #app-side-main-navigation {
+			scrollbar-width: thin;
+			scrollbar-color: #54a067 #ffffff;
+		} */
+
+		/* Chrome, Edge, and Safari */
+		/* #app-side-main-navigation::-webkit-scrollbar {
+			width: 12px;
+		}
+
+		#app-side-main-navigation::-webkit-scrollbar-track {
+			background: #ffffff;
+		}
+
+		#app-side-main-navigation::-webkit-scrollbar-thumb {
+			background-color: #54a067;
+			border-radius: 1px;
+			border: 1px dotted #d31d1d;
+			width: 2px;
+		} */
+		i.bi-arrow-right-square {
+			display: none;
+		}
+	}
 	nav {
 		height: 100vh;
 		box-shadow: none;

@@ -6,13 +6,7 @@
 	import SideMainNavigation from '$lib/components/AppSideMainNavigation.svelte';
 	import Message from '$lib/addons/Message.svelte';
 
-	import { onMount } from 'svelte';
 	export let data;
-	onMount(() => {
-		// if (data?.user == undefined) {
-		// 	goto('/login');
-		// }
-	});
 </script>
 
 <svelte:head>
@@ -34,6 +28,20 @@
 </div>
 
 <style>
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	:global(html::-webkit-scrollbar) {
+		display: none;
+	}
+	:global(body::-webkit-scrollbar) {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	:global(html, body) {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+
 	.page-not-loaded {
 		display: flex;
 		justify-content: center;
@@ -50,5 +58,15 @@
 		width: 100%;
 		padding: 10px;
 		background-color: #f5f5f5;
+	}
+
+	@media (max-width: 576px) {
+		.page {
+			flex-direction: column;
+		}
+		:global(.content) {
+			display: flex;
+			flex-direction: column;
+		}
 	}
 </style>

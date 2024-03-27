@@ -98,20 +98,6 @@
 		nav {
 			flex-direction: column;
 		}
-
-		/* Hide scrollbar for Chrome, Safari and Opera */
-		:global(html::-webkit-scrollbar) {
-			display: none;
-		}
-		:global(body::-webkit-scrollbar) {
-			display: none;
-		}
-
-		/* Hide scrollbar for IE, Edge and Firefox */
-		:global(html, body) {
-			-ms-overflow-style: none; /* IE and Edge */
-			scrollbar-width: none; /* Firefox */
-		}
 	}
 	@media (min-width: 640px) {
 		nav {

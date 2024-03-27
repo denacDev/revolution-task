@@ -25,6 +25,7 @@
 	"type": "module",
 	"dependencies": {
 		"eventsource": "^2.0.2",
-		"pocketbase": "^0.21.1"
+		"pocketbase": "^0.21.1",
+		"svelte-modals": "^1.3.0"
 	}
 }
