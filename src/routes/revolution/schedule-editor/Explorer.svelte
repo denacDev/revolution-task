@@ -22,6 +22,7 @@
 			let returnedData = await sendRequest('?/add_new_schedule', 'POST', {}, frmData);
 			let res = jsonToObj(returnedData);
 			addNotification(res.msg, res.type, res.time);
+			newScheduleName = '';
 		} else {
 			scheduleInputElement.focus();
 			scheduleInputElement.classList.add('border-danger');
@@ -64,12 +65,10 @@
 				<button class="btn-custom-text" on:click={handleAddSchedule}>ADD</button>
 			</div>
 		</div>
-	{:else if activeControl == 'remove-schedule'}
-		<div class="active-control">remove-schedule</div>
 	{:else if activeControl == 'question-schedule'}
 		<div class="active-control">question-schedule</div>
 	{/if}
-	<ExplorerBrowser schedules={data.schedules.items} />
+	<ExplorerBrowser schedules={data} />
 </div>
 
 <style>

@@ -1,12 +1,31 @@
 <script>
+	import { allSchedules } from '$lib/stores/databaseStores';
+	import { onMount } from 'svelte';
+
 	let filterValue = '';
+	let temp = $allSchedules;
+	onMount(() => {
+		// let temp =
+	});
+	const handleFilterValue = () => {
+		console.log('filterValue :>> ', filterValue);
+
+		$allSchedules = $allSchedules.filter((item) => new RegExp('^' + filterValue.replace(/\*/g, '.*')).test(item.name));
+		console.log('$allSchedules :>> ', $allSchedules);
+		if ($allSchedules.length == 0) {
+			$allSchedules = temp;
+		}
+		if (filterValue.length == 0) {
+			$allSchedules = temp;
+		}
+	};
 </script>
 
 <div class="filter-container">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 
-	<input type="text" placeholder="Search Schedule" id="filter-schedule-input" bind:value={filterValue} />
+	<input type="text" placeholder="Search Schedule" id="filter-schedule-input" bind:value={filterValue} on:input={handleFilterValue} />
 	<i class="bi bi-funnel-fill filter-schedule-icon" class:control-icon-disabled={filterValue == ''} title="New Schedule"></i>
 </div>
 

@@ -1,19 +1,27 @@
 <script>
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import pb from '$lib/scripts/dbConnection';
+	import { allSchedules } from '$lib/stores/databaseStores';
 	import { onDestroy, onMount } from 'svelte';
 	import Explorer from './Explorer.svelte';
 	export let data;
 	let dataIsLoading = true;
 
 	const createData = (e) => {
-		//
+		console.log('$allSchedules :>> ', $allSchedules);
+		if ($allSchedules?.length > 0) {
+			$allSchedules = [...$allSchedules, e.record];
+		} else {
+			$allSchedules = [e.record];
+		}
 	};
 	const updateData = (e) => {
-		//
+		let filteredUpdate = $allSchedules.filter((schedule) => schedule.id != e.record.id);
+		$allSchedules = [...filteredUpdate, e.record];
 	};
 	const deleteData = (e) => {
-		//
+		console.log('$allSchedules :>> ', $allSchedules);
+		$allSchedules = $allSchedules.filter((player) => player.id != e.record.id);
 	};
 
 	const subscribeAndUpdateData = () => {
@@ -42,7 +50,12 @@
 		);
 	};
 
-	const initializeData = () => {};
+	const initializeData = () => {
+		setTimeout(() => {
+			$allSchedules = data.schedules.items || [];
+			dataIsLoading = false;
+		}, 500);
+	};
 	onDestroy(() => {
 		pb.collection('schedules').unsubscribe();
 	});
@@ -61,7 +74,7 @@
 	{#if dataIsLoading == true}
 		<p>loading data..</p>
 	{:else}
-		<Explorer {data} />
+		<Explorer data={$allSchedules} />
 	{/if}
 </div>
 
