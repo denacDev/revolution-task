@@ -9,6 +9,8 @@
 	export let data;
 </script>
 
+<svelte:window on:beforeunload|preventDefault />
+
 <svelte:head>
 	<title>{PUBLIC_APP_NAME}</title>
 </svelte:head>

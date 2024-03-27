@@ -21,12 +21,12 @@
 	};
 </script>
 
-<div class="filter-container">
+<div class="box filter-container">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 
 	<input type="text" placeholder="Search Schedule" id="filter-schedule-input" bind:value={filterValue} on:input={handleFilterValue} />
-	<i class="bi bi-funnel-fill filter-schedule-icon" class:control-icon-disabled={filterValue == ''} title="New Schedule"></i>
+	<!-- <i class="bi bi-funnel-fill filter-schedule-icon" class:control-icon-disabled={filterValue == ''} title="New Schedule"></i> -->
 </div>
 
 <style>
@@ -39,8 +39,6 @@
 		align-items: center;
 		gap: 10px;
 
-		border: 1px solid rgba(0, 0, 0, 0.172);
-		border-radius: var(--site-border-radius);
 		padding: 5px 10px;
 		display: flex;
 		flex-direction: row;

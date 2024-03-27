@@ -6,8 +6,9 @@
 	import ExplorerBrowser from './ExplorerBrowser.svelte';
 	import ExplorerControls from './ExplorerControls.svelte';
 	import ExplorerFilter from './ExplorerFilter.svelte';
-	let activeControl = '';
+	let activeControl = false;
 	let newScheduleName = '';
+	let selectedSchedule = undefined;
 	export let data;
 	const handleAddSchedule = async () => {
 		let scheduleInputElement = document.getElementById('new-schedule-input');
@@ -56,22 +57,46 @@
 		<ExplorerControls bind:activeControl />
 		<ExplorerFilter />
 	</div>
-	{#if activeControl == 'new-schedule'}
-		<div class="active-control">
+	{#if activeControl == true}
+		<div class="box active-control">
 			<h5 class="lbl">Create new schedule</h5>
 			<div class="val">
 				<input type="text" placeholder="Schedule Name" id="new-schedule-input" bind:value={newScheduleName} />
 				<!-- <i class="bi bi-plus-square-fill filter-schedule-icon" class:control-icon-disabled={newScheduleName == ''} title="New Schedule"></i> -->
-				<button class="btn-custom-text" on:click={handleAddSchedule}>ADD</button>
+				<button class="btn-custom-width-text" on:click={handleAddSchedule}>ADD</button>
 			</div>
 		</div>
-	{:else if activeControl == 'question-schedule'}
-		<div class="active-control">question-schedule</div>
 	{/if}
-	<ExplorerBrowser schedules={data} />
+	<div class="box">
+		<ExplorerBrowser schedules={data} bind:selectedSchedule />
+	</div>
+	<div class="box">
+		<div class=" schedule-title">
+			<span class="lbl">Schedule:</span>
+			{#if selectedSchedule == undefined}
+				<span class="text-warning">Select a schedule</span>
+			{:else}
+				<div class="text-success">{selectedSchedule.name}</div>
+			{/if}
+		</div>
+		{#if selectedSchedule != undefined}
+			done
+		{/if}
+	</div>
 </div>
 
 <style>
+	:global(.text-warning, .text-success) {
+		font-size: 1.25rem;
+	}
+
+	.schedule-title {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		gap: var(--site-gap-flex);
+	}
 	:global(.border-danger) {
 		outline: 1px solid red;
 		border-radius: 3px;
@@ -83,19 +108,21 @@
 		min-width: max-content;
 		padding: 3px;
 	}
-	.btn-custom-text {
-		border: 1px solid black;
+	.btn-custom-width-text {
+		border: 1px solid gray;
+		box-shadow: var(--site-box-shadow-all-around);
+
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		padding: 2.5px 5px;
-		border-radius: 4px;
+		border-radius: var(--site-border-radius);
 	}
-	.btn-custom-text:hover {
+	.btn-custom-width-text:hover {
 		background-color: rgba(0, 128, 0, 1);
 		cursor: pointer;
 		color: white;
-		border: 1px solid black;
+		/* border: 1px solid black; */
 		transition: all 0.3s ease;
 		box-shadow: 0px 0px 1px white;
 	}
@@ -105,15 +132,7 @@
 		scale: 1 !important;
 	}
 
-	.active-control {
-		border: 1px solid rgba(0, 0, 0, 0.172);
-		border-radius: var(--site-border-radius);
-	}
-	.active-control .lbl {
-		padding: 3px 10px;
-	}
 	.active-control .val {
-		padding: 5px 10px;
 		/* border: 1px solid rgba(0, 0, 0, 0.172); */
 		display: flex;
 		flex-direction: row;
@@ -128,7 +147,9 @@
 		justify-content: flex-start;
 		align-items: stretch;
 		width: 100%;
-		max-width: max-content;
+		max-width: 650px;
+		min-width: 300px;
+		margin: 0px auto;
 		/* max-width: 130px; */
 		gap: 10px;
 	}
@@ -138,14 +159,5 @@
 		justify-content: flex-start;
 		align-items: stretch;
 		gap: 10px;
-	}
-	.bi {
-		font-size: 1.5rem;
-		text-shadow: 0px 0px 1px white;
-		transition: all 0.3s ease;
-	}
-	.bi:hover {
-		scale: 1.1;
-		cursor: pointer;
 	}
 </style>

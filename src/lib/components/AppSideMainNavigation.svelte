@@ -164,6 +164,9 @@
 		/* box-shadow: 15px 0px 13px -15px rgba(0, 0, 0, 1) inset; */
 		cursor: pointer;
 	}
+	.active-link i {
+		color: red;
+	}
 	.nav-link,
 	.nav-link-disabled {
 		width: 100%;

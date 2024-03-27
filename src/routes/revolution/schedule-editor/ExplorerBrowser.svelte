@@ -1,7 +1,8 @@
 <script>
 	import ModalRemoveSchedule from './Modal_remove_schedule.svelte';
-	export let schedules = [];
 	import { openModal } from 'svelte-modals';
+	export let schedules = [];
+	export let selectedSchedule = undefined;
 
 	//
 	console.log('schedules :>> ', schedules);
@@ -13,15 +14,19 @@
 			data: schedule
 		});
 	};
-	const handleSelectItem = (e) => {
+	const handleSelectItem = (e, schedule) => {
 		if (e.target.classList.contains('disabled') == false) {
+			// remove any other selected items
 			let allActiveItems = document.querySelectorAll('.list-group-item.active');
 			if (allActiveItems.length > 0) {
 				for (const iterator of allActiveItems) {
 					iterator.classList.remove('active');
 				}
+				selectedSchedule = undefined;
 			}
+
 			e.target.classList.toggle('active');
+			selectedSchedule = schedule;
 		}
 	};
 </script>
@@ -37,7 +42,7 @@
 				<li
 					class="list-group-item d-flex justify-content-between align-items-center"
 					on:click={(e) => {
-						handleSelectItem(e);
+						handleSelectItem(e, schedule);
 					}}>
 					{schedule.name}
 
@@ -62,6 +67,13 @@
 		background-color: rgba(0, 128, 0, 0.1) !important;
 		color: green !important;
 		border: 1px solid rgba(0, 128, 0, 0.153) !important;
+	}
+	.list-group {
+		padding: 10px;
+		max-height: 150px;
+		overflow-y: scroll;
+		box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.342);
+		background-color: rgba(0, 0, 0, 0.049);
 	}
 	.list-group-item {
 		color: green;
