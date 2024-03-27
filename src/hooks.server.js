@@ -1,4 +1,6 @@
-
+import pb from '$lib/scripts/dbConnection';
+import { serializeNonPOJOs } from '$lib/scripts/helpers.funcs';
+//without this, realtime subscription to pocketbase does not work
 import eventsource from 'eventsource';
 global.EventSource = eventsource;
 export const handle = async ({event, resolve}) => {

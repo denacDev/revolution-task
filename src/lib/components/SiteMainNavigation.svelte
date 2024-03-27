@@ -3,6 +3,7 @@
 	import logo from '$lib/static/revolution_transparent.png';
 	import { page } from '$app/stores';
 	let menuOpen = false;
+	export let auth;
 	const handleSideMenuClose = (params) => {
 		menuOpen = !menuOpen;
 	};
@@ -27,8 +28,12 @@
 	</div>
 	<div class="container login-container d-flex flex-wrap">
 		<ul class="nav" class:nav-active={menuOpen == true}>
-			<li class="nav-item"><a href="/login" class:active={$page.route.id === '/login'} class="nav-link link-body-emphasis px-2">Login</a></li>
-			<li class="nav-item"><a href="/register" class:active={$page.route.id === '/register'} class="nav-link link-body-emphasis px-2">Sign up</a></li>
+			{#if auth != undefined}
+				<span>{auth?.name}</span>
+			{:else}
+				<li class="nav-item"><a href="/login" class:active={$page.route.id === '/login'} class="nav-link link-body-emphasis px-2">Login</a></li>
+				<li class="nav-item"><a href="/register" class:active={$page.route.id === '/register'} class="nav-link link-body-emphasis px-2">Sign up</a></li>
+			{/if}
 		</ul>
 	</div>
 </nav>

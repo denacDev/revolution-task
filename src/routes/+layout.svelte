@@ -4,6 +4,7 @@
 	console.log('$page :>> ', $page);
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import SiteMainNavigation from '$lib/components/SiteMainNavigation.svelte';
+	export let data;
 </script>
 
 <svelte:head>
@@ -12,7 +13,7 @@
 
 <div class="page">
 	{#if !$page.route.id.includes('/revolution')}
-		<SiteMainNavigation />
+		<SiteMainNavigation auth={data?.user} />
 		<!-- content here -->
 		<div class="container-divider"></div>
 	{/if}

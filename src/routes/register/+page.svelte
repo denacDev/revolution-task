@@ -1,5 +1,7 @@
 <script>
 	import { PUBLIC_APP_NAME } from '$env/static/public';
+	let mainPass;
+	let rePass;
 </script>
 
 <svelte:head>
@@ -7,7 +9,7 @@
 </svelte:head>
 
 <div class="content">
-	<form>
+	<form action="?/register_user_pass" method="post" autocomplete="off">
 		<div class="fields">
 			<div class="form-floating">
 				<input name="email" type="email" class="form-control" id="emailInput" placeholder="name@example.com" />
@@ -18,12 +20,18 @@
 				<label for="nameInput">Name</label>
 			</div>
 			<div class="form-floating">
-				<input name="password" type="password" class="form-control" id="passwordInput" placeholder="Password" />
+				<input name="password" type="password" class="form-control" id="passwordInput" placeholder="Password" bind:value={mainPass} />
 				<label for="passwordInput">Password</label>
+				{#if mainPass?.length < 8}
+					<span class="lbl lbl-red">* Min. 8 chars.</span>
+				{/if}
 			</div>
 			<div class="form-floating">
-				<input name="repassword" type="password" class="form-control" id="rePasswordInput" placeholder="Password" />
+				<input name="passwordConfirm" type="password" class="form-control" id="rePasswordInput" placeholder="Password" bind:value={rePass} />
 				<label for="rePasswordInput">Re-Password</label>
+				{#if rePass != mainPass}
+					<span class="lbl lbl-red">* Same as password</span>
+				{/if}
 			</div>
 		</div>
 
@@ -32,6 +40,13 @@
 </div>
 
 <style>
+	.lbl-red {
+		color: red !important;
+	}
+	.lbl {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
 	.content {
 		max-width: 700px;
 		width: 100%;
