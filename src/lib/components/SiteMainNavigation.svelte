@@ -29,7 +29,7 @@
 	<div class="container login-container d-flex flex-wrap">
 		<ul class="nav" class:nav-active={menuOpen == true}>
 			{#if auth != undefined}
-				<span>{auth?.name}</span>
+				<a href="/login" class:active={$page.route.id === '/login'} class="nav-link link-body-emphasis px-2">{auth?.name}</a>
 			{:else}
 				<li class="nav-item"><a href="/login" class:active={$page.route.id === '/login'} class="nav-link link-body-emphasis px-2">Login</a></li>
 				<li class="nav-item"><a href="/register" class:active={$page.route.id === '/register'} class="nav-link link-body-emphasis px-2">Sign up</a></li>
