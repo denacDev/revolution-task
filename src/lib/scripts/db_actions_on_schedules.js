@@ -27,3 +27,10 @@ export const getAllTasks = async (params) => {
   });
   return records
 }
+
+export const removeTask = (taskId) => {
+   
+   let record = pb.collection('tasks_for_schedule').delete(taskId)
+   return record
+}
+

@@ -1,27 +1,79 @@
 <script>
-	let selectedTask = undefined;
+	import pb from '$lib/scripts/dbConnection';
+	import { invertArray, customize_date } from '$lib/scripts/helpers.funcs';
+	import TaskBadge from './TaskBadge.svelte';
+	import Message from '$lib/addons/Message.svelte';
+
 	import { getAllTasks } from '$lib/scripts/db_actions_on_schedules';
+	import { onMount, onDestroy } from 'svelte';
+	import { allOperationsForSelectedSchedule } from '$lib/stores/databaseStores';
 	let listIsExpanded = false;
+	let tasksAreLoaded = false;
+
+	const createData = (e) => {
+		if ($allOperationsForSelectedSchedule?.length > 0) {
+			$allOperationsForSelectedSchedule = [...$allOperationsForSelectedSchedule, e.record];
+		} else {
+			$allOperationsForSelectedSchedule = [e.record];
+		}
+	};
+	const updateData = (e) => {
+		let filteredUpdate = $allOperationsForSelectedSchedule.filter((operation) => operation.id != e.record.id);
+		$allOperationsForSelectedSchedule = [...filteredUpdate, e.record];
+	};
+	const deleteData = (e) => {
+		$allOperationsForSelectedSchedule = $allOperationsForSelectedSchedule.filter((operation) => operation.id != e.record.id);
+	};
+
+	const subscribeAndUpdateData = () => {
+		pb.authStore?.loadFromCookie(document.cookie || '');
+		pb.realtime.subscribe(
+			'tasks_for_schedule',
+			function (e) {
+				// console.log('subscribe and update data');
+				// console.log('e :>> ', e);
+				switch (e.action) {
+					case 'create':
+						createData(e);
+						break;
+					case 'update':
+						updateData(e);
+						break;
+					case 'delete':
+						deleteData(e);
+						break;
+
+					default:
+						break;
+				}
+			},
+			{ expand: 'belongs_to, operation' } // expand
+		);
+	};
+
+	const initializeData = async () => {
+		$allOperationsForSelectedSchedule = await getAllTasks();
+		setTimeout(() => {
+			tasksAreLoaded = true;
+		}, 500);
+	};
+	onMount(async () => {
+		await initializeData();
+		subscribeAndUpdateData();
+	});
+	onDestroy(() => {
+		pb.collection('tasks_for_schedule').unsubscribe();
+	});
 </script>
 
-{#await getAllTasks()}
-	<!-- getAllTasks() is pending -->
-{:then tasks}
+{#if tasksAreLoaded == false && $allOperationsForSelectedSchedule.length == 0}
+	loading data..
+{:else if tasksAreLoaded == true && $allOperationsForSelectedSchedule.length == 0}
+	<Message type="warning" title="No tasks" message="There are no tasks for this schedule yet!" spaceY={false} action="null" />
+{:else}
 	<div class="tasks-container" class:expanded-tasks={listIsExpanded == true}>
-		{#each tasks as task}
-			<!-- svelte-ignore a11y-interactive-supports-focus -->
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div
-				role="button"
-				class="task"
-				class:selected-task={selectedTask?.id == task.id}
-				id="task-{task.id}"
-				on:click={() => {
-					selectedTask = task;
-				}}>
-				<i class="bi {task?.expand?.operation?.icon}"></i>
-				<span class="name">{task?.expand?.operation?.name}</span>
-			</div>
+		{#each invertArray($allOperationsForSelectedSchedule) as task}
+			<TaskBadge {task} />
 		{/each}
 	</div>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -43,9 +95,7 @@
 				listIsExpanded = false;
 			}}></i>
 	{/if}
-{:catch error}
-	error getting all tasks:: {error}
-{/await}
+{/if}
 
 <style>
 	.expand-list-icon {
@@ -66,43 +116,6 @@
 		overflow-y: scroll;
 		/* border: 1px solid black; */
 		align-items: stretch;
-		width: 100%;
-	}
-	.task {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: flex-start;
-		gap: var(--site-gap-flex);
-		padding: 0px 10px;
-		border-radius: var(--site-border-radius);
-		border: 1px solid rgba(0, 0, 0, 0.172);
-		width: 100%;
-		min-width: 100%;
-	}
-	.task:hover {
-		background-color: rgba(0, 0, 0, 0.172);
-		cursor: pointer;
-	}
-	.selected-task {
-		background-color: rgba(0, 0, 0, 0.172);
-		cursor: pointer;
-	}
-	@media (max-width: 576px) {
-		.name {
-			width: 100%;
-		}
-	}
-	.task {
-		/* border: 1px solid black; */
-		/* width: 100% !important; */
-		/* min-width: 100% !important; */
-	}
-	.bi {
-		/* border: 1px solid black; */
-	}
-	.name {
-		/* border: 1px solid black; */
 		width: 100%;
 	}
 </style>

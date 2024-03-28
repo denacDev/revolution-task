@@ -8,13 +8,13 @@
 	let icon = 'info';
 	switch (type) {
 		case 'info':
-			icon = 'info-circle-fill';
+			icon = 'bi-info-circle-fill';
 			break;
 		case 'success':
-			icon = 'check-circle-fill';
+			icon = 'bi-check-circle-fill';
 			break;
 		case 'warning':
-			icon = 'exclamation-circle-fill';
+			icon = 'bi-exclamation-circle-fill';
 			break;
 		case 'danger':
 			icon = 'bi-sign-stop-fill';
@@ -90,11 +90,10 @@
 		width: 100%;
 		gap: var(--site-gap-flex);
 		border-bottom: 1px solid rgba(0, 0, 0, 0.059);
-		padding-bottom: 10px;
 	}
 
 	.card-top-left-text {
-		font-size: var(--text-font-size);
+		font-size: var(--site-font-size);
 		font-weight: 900;
 		transition: 0.3s;
 	}

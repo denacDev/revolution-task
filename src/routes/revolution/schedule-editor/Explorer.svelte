@@ -70,12 +70,6 @@
 		border-radius: 3px;
 		border: 1px solid transparent;
 	}
-	/* custom btn with text */
-	input#new-schedule-input {
-		width: 100%;
-		min-width: max-content;
-		padding: 3px;
-	}
 
 	:global(.control-icon-disabled) {
 		color: gray !important;
@@ -83,15 +77,6 @@
 		scale: 1 !important;
 	}
 
-	.active-control .val {
-		/* border: 1px solid rgba(0, 0, 0, 0.172); */
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		gap: 10px;
-		max-width: 100%;
-		width: 100%;
-	}
 	.explorer-container {
 		display: flex;
 		flex-direction: column;

@@ -7,7 +7,6 @@
 	export let selectedSchedule = undefined;
 
 	const handleAddNewSchedule = () => {
-		console.log('onclck selectedSchedule :>> ', selectedSchedule);
 		if (selectedSchedule != undefined) {
 			openModal(ModalAddNewScheduleTask, {
 				isOpen: true,
@@ -19,6 +18,9 @@
 			addNotification('Please select a schedule first', 'danger', 'long');
 		}
 	};
+	const handleOtherAction = () => {
+		addNotification('coming soon..', 'success', 'stay');
+	};
 </script>
 
 <div class="tasks-container" id="tasks">
@@ -26,6 +28,10 @@
 		<a title="Tasks" class="a-custom-simple-button" href="#" role="button" on:click={handleAddNewSchedule}>
 			<i class="bi bi-gear-fill" style="font-size: 1rem;"></i>
 			<span class="link-lbl">new task</span>
+		</a>
+		<a title="Tasks" class="a-custom-simple-button" href="#" role="button" on:click={handleOtherAction}>
+			<i class="bi bi-gear-fill" style="font-size: 1rem;"></i>
+			<span class="link-lbl">other task</span>
 		</a>
 	</div>
 	<TasksBrowser />
@@ -39,10 +45,20 @@
 		gap: var(--site-gap-flex);
 	}
 
+	.tasks-controls {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: var(--site-gap-flex);
+	}
 	@media (max-width: 576px) {
 		.tasks-container {
 			flex-direction: column;
 			justify-content: center;
+		}
+		.tasks-controls {
+			flex-direction: row;
+			justify-content: flex-start;
 		}
 	}
 	.bi {

@@ -8,7 +8,6 @@
 	let dataIsLoading = true;
 
 	const createData = (e) => {
-		console.log('$allSchedules :>> ', $allSchedules);
 		if ($allSchedules?.length > 0) {
 			$allSchedules = [...$allSchedules, e.record];
 		} else {
@@ -21,7 +20,7 @@
 	};
 	const deleteData = (e) => {
 		console.log('$allSchedules :>> ', $allSchedules);
-		$allSchedules = $allSchedules.filter((player) => player.id != e.record.id);
+		$allSchedules = $allSchedules.filter((schedule) => schedule.id != e.record.id);
 	};
 
 	const subscribeAndUpdateData = () => {
@@ -29,8 +28,6 @@
 		pb.realtime.subscribe(
 			'schedules',
 			function (e) {
-				// console.log('subscribe and update data');
-				// console.log('e :>> ', e);
 				switch (e.action) {
 					case 'create':
 						createData(e);
