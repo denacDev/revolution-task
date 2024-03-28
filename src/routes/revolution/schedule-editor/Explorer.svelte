@@ -8,7 +8,7 @@
 	import ExplorerControls from './ExplorerControls.svelte';
 	import ExplorerFilter from './ExplorerFilter.svelte';
 	import ScheduleNavigation from './ScheduleNavigation.svelte';
-	import ScheduleOperations from './ScheduleOperations.svelte';
+	import ScheduleTasks from './ScheduleTasks.svelte';
 	import ScheduleProperties from './ScheduleProperties.svelte';
 	import ScheduleParameters from './ScheduleParameters.svelte';
 	import ScheduleInteraction from './ScheduleInteraction.svelte';
@@ -36,16 +36,18 @@
 			{/if}
 		</div>
 		{#if selectedSchedule != undefined}
-			<ScheduleNavigation />
-			{#if $schedule_editor_subNav_item == 'schedule'}
-				<div class="box"><ScheduleOperations /></div>
-			{:else if $schedule_editor_subNav_item == 'properties'}
-				<div class="box"><ScheduleProperties /></div>
-			{:else if $schedule_editor_subNav_item == 'parameters'}
-				<div class="box"><ScheduleParameters /></div>
-			{:else if $schedule_editor_subNav_item == 'interaction'}
-				<div class="box"><ScheduleInteraction /></div>
-			{/if}
+			<div class="box">
+				<ScheduleNavigation />
+				{#if $schedule_editor_subNav_item == 'tasks'}
+					<div class="box-inset"><ScheduleTasks {selectedSchedule} /></div>
+				{:else if $schedule_editor_subNav_item == 'properties'}
+					<div class="box-inset"><ScheduleProperties /></div>
+				{:else if $schedule_editor_subNav_item == 'parameters'}
+					<div class="box-inset"><ScheduleParameters /></div>
+				{:else if $schedule_editor_subNav_item == 'interaction'}
+					<div class="box-inset"><ScheduleInteraction /></div>
+				{/if}
+			</div>
 		{/if}
 	</div>
 </div>
@@ -74,24 +76,7 @@
 		min-width: max-content;
 		padding: 3px;
 	}
-	.btn-custom-width-text {
-		border: 1px solid gray;
-		box-shadow: var(--site-box-shadow-all-around);
 
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 2.5px 5px;
-		border-radius: var(--site-border-radius);
-	}
-	.btn-custom-width-text:hover {
-		background-color: rgba(0, 128, 0, 1);
-		cursor: pointer;
-		color: white;
-		/* border: 1px solid black; */
-		transition: all 0.3s ease;
-		box-shadow: 0px 0px 1px white;
-	}
 	:global(.control-icon-disabled) {
 		color: gray !important;
 		cursor: not-allowed !important;

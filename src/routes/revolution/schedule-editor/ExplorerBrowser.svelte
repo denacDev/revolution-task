@@ -37,7 +37,7 @@
 	<h5>Schedules</h5>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	{#if schedules?.length > 0}
-		<ul class="list-group">
+		<ul class="box-inset list-group">
 			<!-- invertArray -->
 			{#each invertArray(schedules) as schedule}
 				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
@@ -111,11 +111,11 @@
 		border: 1px solid rgba(0, 128, 0, 0.153) !important;
 	}
 	.list-group {
-		padding: 10px;
+		/* padding: 10px; */
 		max-height: 150px;
 		overflow-y: scroll;
-		box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.342);
-		background-color: rgba(0, 0, 0, 0.049);
+		/* box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.342); */
+		/* background-color: rgba(0, 0, 0, 0.049); */
 	}
 	.list-group-item {
 		color: green;

@@ -144,9 +144,19 @@
 		width: 100%;
 		text-align: center !important;
 	}
-	.nav-link {
-		border-bottom: none !important;
+	/* .nav-link {
+		
 		border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+	} */
+	@media (min-width: 576px) {
+		.nav-link {
+			border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+		}
+	}
+	@media (max-width: 576px) {
+		.nav-link {
+			border-bottom: 1px solid transparent !important;
+		}
 	}
 	.nav-link:hover,
 	.nav-link:focus {
@@ -154,7 +164,7 @@
 		cursor: pointer;
 	}
 	.nav-link:last-of-type {
-		border-bottom: none !important;
+		border-bottom: 1px solid transparent !important;
 	}
 	.nav-link-disabled {
 		background-color: none;
