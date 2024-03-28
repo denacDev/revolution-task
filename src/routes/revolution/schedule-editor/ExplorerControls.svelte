@@ -1,6 +1,17 @@
 <script>
 	//
+	import { openModal } from 'svelte-modals';
+	import ModalAddNewSchedule from './Modal_add_new_schedule.svelte';
+
 	export let activeControl = false;
+
+	const handleAddNewSchedule = () => {
+		openModal(ModalAddNewSchedule, {
+			isOpen: true,
+			title: 'Add new Schedule ',
+			data: {}
+		});
+	};
 </script>
 
 <div class="box controls-container">
@@ -11,11 +22,8 @@
 		class:add-schedule-active={activeControl == true}
 		title="New Schedule"
 		on:click={() => {
-			if (activeControl == false) {
-				activeControl = true;
-			} else {
-				activeControl = false;
-			}
+			activeControl == true;
+			handleAddNewSchedule();
 		}}></i>
 </div>
 

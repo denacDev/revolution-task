@@ -115,7 +115,7 @@
 .bi {
 	font-size: 1.5rem;
 	transition: all 0.3s ease;
-	text-shadow: --site-icon-text-shadow;
+	text-shadow: var(--site-icon-text-shadow);
 }
 .bi:hover {
 	scale: 1.1;

@@ -2,7 +2,18 @@ const  {randomBytes} = await import('node:crypto');
 import notifications, { addNotification } from '$lib/scripts/notifications';
 import { json } from '@sveltejs/kit';
 
-
+export const customize_date = (dt, secs = false) => {
+  if(dt != undefined || ""){
+   if(secs){
+     return dt.slice(0, 10) + ' @ ' + dt.slice(11, 19 );
+   }
+   else{
+     return dt.slice(0, 10) + ' @ ' + dt.slice(11, 16);
+   }
+  }
+  else{ return undefined}
+ };
+ 
 
 export const serializeNonPOJOs = (obj) => {
    return structuredClone(obj);
@@ -30,4 +41,12 @@ export const sendRequest =  async(url, method, headers, body, redirectTo="/", ti
   } catch (error) {
     addNotification(error, 'danger', 'long');
   }
+}
+
+export const invertArray = (arr) => {
+  arr.sort(function (a, b) {
+    return new Date(b.created) - new Date(a.created);
+  });
+
+  return arr;
 }

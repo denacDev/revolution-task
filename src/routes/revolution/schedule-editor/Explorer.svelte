@@ -7,49 +7,8 @@
 	import ExplorerControls from './ExplorerControls.svelte';
 	import ExplorerFilter from './ExplorerFilter.svelte';
 	let activeControl = false;
-	let newScheduleName = '';
 	let selectedSchedule = undefined;
 	export let data;
-	const handleAddSchedule = async () => {
-		let scheduleInputElement = document.getElementById('new-schedule-input');
-		if (newScheduleName.length > 3) {
-			// remove error border if it has one
-			if (scheduleInputElement.classList.contains('border-danger')) {
-				scheduleInputElement.classList.remove('border-danger');
-			}
-
-			let frmData = new FormData();
-			frmData.append('name', newScheduleName);
-			let returnedData = await sendRequest('?/add_new_schedule', 'POST', {}, frmData);
-			let res = jsonToObj(returnedData);
-			addNotification(res.msg, res.type, res.time);
-			newScheduleName = '';
-		} else {
-			scheduleInputElement.focus();
-			scheduleInputElement.classList.add('border-danger');
-			addNotification('The schedule name should have min. 3 chars.', 'warning', 'short');
-		}
-	};
-
-	const jsonToObj = (woo) => {
-		if (woo.type == 'success') {
-			let parsedData = JSON.parse(woo.data);
-			let res = {
-				msg: 'Schedule added successfuly' || 'error getting the msg',
-				type: woo.type || 'danger',
-				time: 'short' || 'long',
-				name: parsedData[5] || '',
-				id: parsedData[4] || ''
-			};
-
-			if (parsedData[1] == undefined) {
-				console.log('parsedData :>> ', parsedData);
-			}
-			return res;
-		} else {
-			console.log('error :>> PARSING THE JSON DATA HAS FAILED', woo);
-		}
-	};
 </script>
 
 <div class="explorer-container">
@@ -57,16 +16,7 @@
 		<ExplorerControls bind:activeControl />
 		<ExplorerFilter />
 	</div>
-	{#if activeControl == true}
-		<div class="box active-control">
-			<h5 class="lbl">Create new schedule</h5>
-			<div class="val">
-				<input type="text" placeholder="Schedule Name" id="new-schedule-input" bind:value={newScheduleName} />
-				<!-- <i class="bi bi-plus-square-fill filter-schedule-icon" class:control-icon-disabled={newScheduleName == ''} title="New Schedule"></i> -->
-				<button class="btn-custom-width-text" on:click={handleAddSchedule}>ADD</button>
-			</div>
-		</div>
-	{/if}
+
 	<div class="box">
 		<ExplorerBrowser schedules={data} bind:selectedSchedule />
 	</div>

@@ -1,6 +1,7 @@
 <script>
 	import ModalRemoveSchedule from './Modal_remove_schedule.svelte';
 	import { openModal } from 'svelte-modals';
+	import { invertArray, customize_date } from '$lib/scripts/helpers.funcs';
 	export let schedules = [];
 	export let selectedSchedule = undefined;
 
@@ -15,7 +16,8 @@
 		});
 	};
 	const handleSelectItem = (e, schedule) => {
-		if (e.target.classList.contains('disabled') == false) {
+		let target = document.getElementById(e);
+		if (target.classList.contains('disabled') == false) {
 			// remove any other selected items
 			let allActiveItems = document.querySelectorAll('.list-group-item.active');
 			if (allActiveItems.length > 0) {
@@ -25,7 +27,7 @@
 				selectedSchedule = undefined;
 			}
 
-			e.target.classList.toggle('active');
+			target.classList.toggle('active');
 			selectedSchedule = schedule;
 		}
 	};
@@ -36,24 +38,36 @@
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	{#if schedules?.length > 0}
 		<ul class="list-group">
-			{#each schedules as schedule}
+			<!-- invertArray -->
+			{#each invertArray(schedules) as schedule}
 				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<li
-					class="list-group-item d-flex justify-content-between align-items-center"
+					id="list-group-item-{schedule.id}"
+					class="list-group-item"
 					on:click={(e) => {
-						handleSelectItem(e, schedule);
+						handleSelectItem(`list-group-item-${schedule.id}`, schedule);
 					}}>
-					{schedule.name}
-
-					<!-- svelte-ignore missing-declaration -->
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<i
-						class="bi bi-x-circle-fill remove-icon"
-						title="Clear"
-						on:click={(e) => {
-							removeSchedule(schedule);
-						}}></i>
+					<div class="top">
+						<div class="top-left">
+							<i>{schedule.name}</i>
+						</div>
+						<div class="top-right">
+							<!-- svelte-ignore missing-declaration -->
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<i
+								class="bi bi-x-circle-fill remove-icon"
+								title="Clear"
+								on:click={(e) => {
+									removeSchedule(schedule);
+								}}></i>
+						</div>
+					</div>
+					<div class="bottom">
+						<div>Created: {customize_date(schedule.created, true)}</div>
+						<div>Last updated: {customize_date(schedule.updated, true)}</div>
+					</div>
+					<div></div>
 				</li>
 			{/each}
 		</ul>
@@ -63,6 +77,34 @@
 </div>
 
 <style>
+	.top {
+		/* border: 1px solid black; */
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0px;
+	}
+	.top-left {
+		/* border: 1px solid black; */
+	}
+	.top-right {
+		/* border: 1px solid black; */
+	}
+	.bottom {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0px;
+	}
+	.bottom div {
+		font-size: xx-small !important;
+		color: var(--bs-secondary-color);
+
+		/* border: 1px solid black; */
+	}
+
 	:global(li.active) {
 		background-color: rgba(0, 128, 0, 0.1) !important;
 		color: green !important;
@@ -77,6 +119,7 @@
 	}
 	.list-group-item {
 		color: green;
+		padding: 0.2rem var(--bs-list-group-item-padding-x);
 	}
 	.list-group-item:hover {
 		color: green;
