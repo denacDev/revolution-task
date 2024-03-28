@@ -14,7 +14,7 @@
 	};
 </script>
 
-<div class="box controls-container">
+<div class=" controls-container">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<i
@@ -39,7 +39,7 @@
 	}
 
 	.bi {
-		font-size: 1.5rem;
+		font-size: 2.5rem;
 		text-shadow: 0px 0px 1px white;
 		transition: all 0.3s ease;
 	}

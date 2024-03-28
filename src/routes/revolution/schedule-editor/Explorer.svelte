@@ -2,10 +2,16 @@
 	// import { goto } from '$app/navigation';
 	import notifications, { addNotification } from '$lib/scripts/notifications';
 	import { sendRequest, serializeNonPOJOs } from '$lib/scripts/helpers.funcs.js';
+	import { schedule_editor_subNav_item } from '$lib/stores/uiStores';
 
 	import ExplorerBrowser from './ExplorerBrowser.svelte';
 	import ExplorerControls from './ExplorerControls.svelte';
 	import ExplorerFilter from './ExplorerFilter.svelte';
+	import ScheduleNavigation from './ScheduleNavigation.svelte';
+	import ScheduleOperations from './ScheduleOperations.svelte';
+	import ScheduleProperties from './ScheduleProperties.svelte';
+	import ScheduleParameters from './ScheduleParameters.svelte';
+	import ScheduleInteraction from './ScheduleInteraction.svelte';
 	let activeControl = false;
 	let selectedSchedule = undefined;
 	export let data;
@@ -17,12 +23,12 @@
 		<ExplorerFilter />
 	</div>
 
-	<div class="box">
+	<div class="">
 		<ExplorerBrowser schedules={data} bind:selectedSchedule />
 	</div>
-	<div class="box">
+	<div class="">
 		<div class=" schedule-title">
-			<span class="lbl">Schedule:</span>
+			<span class="lbl">Selected Schedule:</span>
 			{#if selectedSchedule == undefined}
 				<span class="text-warning">Select a schedule</span>
 			{:else}
@@ -30,7 +36,16 @@
 			{/if}
 		</div>
 		{#if selectedSchedule != undefined}
-			done
+			<ScheduleNavigation />
+			{#if $schedule_editor_subNav_item == 'schedule'}
+				<div class="box"><ScheduleOperations /></div>
+			{:else if $schedule_editor_subNav_item == 'properties'}
+				<div class="box"><ScheduleProperties /></div>
+			{:else if $schedule_editor_subNav_item == 'parameters'}
+				<div class="box"><ScheduleParameters /></div>
+			{:else if $schedule_editor_subNav_item == 'interaction'}
+				<div class="box"><ScheduleInteraction /></div>
+			{/if}
 		{/if}
 	</div>
 </div>
@@ -46,6 +61,7 @@
 		align-items: center;
 		justify-content: flex-start;
 		gap: var(--site-gap-flex);
+		margin: var(--site-space-y) 0px;
 	}
 	:global(.border-danger) {
 		outline: 1px solid red;

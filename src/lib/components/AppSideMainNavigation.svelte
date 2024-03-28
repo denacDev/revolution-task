@@ -96,10 +96,7 @@
 			-ms-overflow-style: none; /* IE and Edge */
 			scrollbar-width: none; /* Firefox */
 		}
-		.nav-link {
-			border-bottom: none !important;
-			border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-		}
+
 		/* ===== Scrollbar CSS ===== */
 		/* Firefox */
 		/* #app-side-main-navigation {
@@ -147,7 +144,10 @@
 		width: 100%;
 		text-align: center !important;
 	}
-
+	.nav-link {
+		border-bottom: none !important;
+		border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+	}
 	.nav-link:hover,
 	.nav-link:focus {
 		background-color: #f5f5f5;
