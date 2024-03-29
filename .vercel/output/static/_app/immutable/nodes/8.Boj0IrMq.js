@@ -1,0 +1,1 @@
+import{s}from"../chunks/scheduler.B_OghNyv.js";import{S as i,i as r}from"../chunks/index.C9ik1EU3.js";const l=!0,c=l;function f(o,t,e){let{data:n}=t;return n.login==!1&&c&&(window.location.href="/login"),o.$$set=a=>{"data"in a&&e(0,n=a.data)},[n]}class m extends i{constructor(t){super(),r(this,t,f,null,s,{data:0})}}export{m as component};

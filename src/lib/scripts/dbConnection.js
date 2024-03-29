@@ -6,7 +6,7 @@ let pb = undefined;
 try {
      pb = new PocketBase('https://dbrevolution.fly.dev');
 // login to db
-await pb.admins.authWithPassword(import.meta.env.VITE_SECRET_EMAIL, import.meta.env.VITE_SECRET_PASSWORD);
+     pb.admins.authWithPassword(import.meta.env.VITE_SECRET_EMAIL, import.meta.env.VITE_SECRET_PASSWORD);
 } catch (err) {
    throw error(500, "Database: "+ err.message );
 }

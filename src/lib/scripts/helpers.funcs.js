@@ -1,4 +1,5 @@
-const  {randomBytes} = await import('node:crypto');
+// const  {randomBytes} = await import('node:crypto');
+import { randomBytes } from "randombytes";
 import notifications, { addNotification } from '$lib/scripts/notifications';
 import { json } from '@sveltejs/kit';
 
@@ -20,7 +21,7 @@ export const serializeNonPOJOs = (obj) => {
  }
 
  export const generateUsername = (name)=>{
-  const id = randomBytes(4).toString('hex');
+  const id = randombytes(4).toString('hex');
   return `${name.slice(0,5)}-${id}`;
 }
 /*
