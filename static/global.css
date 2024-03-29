@@ -88,6 +88,9 @@
 	--site-font-size-300: 15px;
 
 	--site-icon-text-shadow: 0px 0px 1px white;
+
+	--active-link-bg: rgba(0, 128, 0, 0.1);
+	--active-link-border: 1px solid rgba(0, 128, 0, 0.153);
 }
 * {
 	font-size: var(--site-font-size);
@@ -132,12 +135,25 @@
 	background-color: none;
 }
 .active-link {
-	background-color: #f5f5f5;
+	/* background-color: var(--active-link-bg) !important; */
+	color: var(--bs-teal) !important;
+
+	/* box-shadow: 15px 0px 13px -15px rgba(0, 0, 0, 1) inset; */
+	cursor: pointer;
+}
+.active {
+	background-color: var(--active-link-bg) !important;
+	border: var(--active-link-border) !important;
+	color: var(--bs-teal) !important;
+
 	/* box-shadow: 15px 0px 13px -15px rgba(0, 0, 0, 1) inset; */
 	cursor: pointer;
 }
 .active-link i {
-	color: red;
+	color: var(--bs-teal) !important;
+}
+.active-link span {
+	color: var(--bs-success) !important;
 }
 
 .link-lbl {
@@ -164,7 +180,10 @@
 }
 .a-custom-simple-button:hover,
 .a-custom-simple-button:focus {
-	background-color: #f5f5f5;
+	background-color: var(--active-link-bg) !important;
+
+	color: var(--bs-teal) !important;
+
 	cursor: pointer;
 }
 .a-custom-simple-button span {
@@ -179,6 +198,7 @@
 .bi:hover {
 	scale: 1.1;
 	cursor: pointer;
+	color: var(--bs-success) !important;
 }
 /* remove icon */
 .remove-icon {
@@ -207,13 +227,17 @@
 	border-radius: var(--site-border-radius);
 	/* overflow-y: scroll; */
 	box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.342);
-	background-color: rgba(0, 0, 0, 0.049);
+	/* background-color: rgba(0, 0, 0, 0.049); */
 }
 .lbl {
 	font-size: 1.25rem;
 	margin-top: 0;
 	font-weight: 500;
 	color: var(--bs-heading-color);
+}
+.label {
+	color: rgba(0, 0, 0, 0.492);
+	font-size: smaller;
 }
 
 .btn-custom-width-text {
@@ -233,4 +257,64 @@
 	/* border: 1px solid black; */
 	transition: all 0.3s ease;
 	box-shadow: 0px 0px 1px white;
+}
+
+/* front site */
+.content {
+	max-width: 700px;
+	width: 100%;
+	margin: 0px auto;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.content p {
+	font-family:
+		'Jost',
+		-apple-system,
+		blinkmacsystemfont,
+		'Segoe UI',
+		roboto,
+		'Helvetica Neue',
+		arial,
+		'Noto Sans',
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji',
+		'Segoe UI Symbol',
+		'Noto Color Emoji';
+	font-size: 1.2rem;
+	/* border: 1px solid var(--bs-black); */
+	display: block;
+	padding: 10px;
+	margin: 10px;
+	box-shadow: var(--bs-box-shadow-sm) !important;
+}
+
+.content li {
+	font-family:
+		'Jost',
+		-apple-system,
+		blinkmacsystemfont,
+		'Segoe UI',
+		roboto,
+		'Helvetica Neue',
+		arial,
+		'Noto Sans',
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji',
+		'Segoe UI Symbol',
+		'Noto Color Emoji';
+	font-size: 1.2rem;
+}
+
+form {
+	margin: 0px auto;
+	max-width: 330px;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
 }

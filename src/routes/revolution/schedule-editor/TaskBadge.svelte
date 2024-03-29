@@ -5,7 +5,7 @@
 	export let currentIndex;
 	export let count = 0;
 	export let task = {};
-	$: selectedTask = '';
+	export let selectedTask = undefined;
 
 	function replaceAndShift(arr, index, direction) {
 		if (index < 0 || index >= arr.length) {
@@ -103,8 +103,6 @@
 						on:click={(e) => {
 							handleMoveTaskDown(e, task.id);
 						}}></i>
-				{:else}
-					<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
 				{/if}
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<i

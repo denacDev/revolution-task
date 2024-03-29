@@ -39,45 +39,15 @@
 </div>
 
 <style>
-	.content {
-		max-width: 700px;
-		width: 100%;
-		margin: 0px auto;
-		padding: 10px;
-		display: flex;
-		flex-direction: column;
-	}
-	.content p {
-		font-family:
-			'Jost',
-			-apple-system,
-			blinkmacsystemfont,
-			'Segoe UI',
-			roboto,
-			'Helvetica Neue',
-			arial,
-			'Noto Sans',
-			sans-serif,
-			'Apple Color Emoji',
-			'Segoe UI Emoji',
-			'Segoe UI Symbol',
-			'Noto Color Emoji';
-		font-size: 1.2rem;
-	}
-	.content p {
-		border: 1px solid black;
-		display: block;
-		padding: 5px 10px;
-	}
 	.bg-body-tertiary {
 		display: flex !important;
 		flex-direction: column !important;
 	}
 	.lbl {
-		color: rgb(5, 147, 26);
+		color: var(--bs-success);
 	}
 	.val {
-		color: rgba(0, 0, 0, 0.849);
+		color: var(--bs-black);
 		font-size: smaller;
 	}
 </style>

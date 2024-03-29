@@ -60,12 +60,13 @@
 		justify-content: space-between;
 		flex-direction: row;
 		transition: all 0.3s ease;
-		margin: var(--site-space-y) 0px;
+		margin: var(--site-gap-flex) 0px;
 	}
 	.nav-link {
 		max-width: 100%;
 		width: 100%;
 		padding: 10px;
+		text-align: center;
 	}
 	@media (max-width: 576px) {
 		.nav-link {

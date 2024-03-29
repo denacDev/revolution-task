@@ -1,8 +1,7 @@
 <script>
 	// import { goto } from '$app/navigation';
-	import notifications, { addNotification } from '$lib/scripts/notifications';
-	import { sendRequest, serializeNonPOJOs } from '$lib/scripts/helpers.funcs.js';
 	import { schedule_editor_subNav_item } from '$lib/stores/uiStores';
+	import Message from '$lib/addons/Message.svelte';
 
 	import ExplorerBrowser from './ExplorerBrowser.svelte';
 	import ExplorerControls from './ExplorerControls.svelte';
@@ -14,6 +13,7 @@
 	import ScheduleInteraction from './ScheduleInteraction.svelte';
 	let activeControl = false;
 	let selectedSchedule = undefined;
+	let selectedTask = undefined;
 	export let data;
 </script>
 
@@ -23,10 +23,10 @@
 		<ExplorerFilter />
 	</div>
 
-	<div class="">
+	<div>
 		<ExplorerBrowser schedules={data} bind:selectedSchedule />
 	</div>
-	<div class="">
+	<div>
 		<div class=" schedule-title">
 			<span class="lbl">Selected Schedule:</span>
 			{#if selectedSchedule == undefined}
@@ -36,10 +36,40 @@
 			{/if}
 		</div>
 		{#if selectedSchedule != undefined}
-			<div class="box">
+			<div class="box schedule-navigation-box">
 				<ScheduleNavigation />
 				{#if $schedule_editor_subNav_item == 'tasks'}
-					<div class="box-inset"><ScheduleTasks {selectedSchedule} /></div>
+					<div class="">
+						<ScheduleTasks {selectedSchedule} bind:selectedTask />
+					</div>
+					{#if selectedTask != undefined}
+						<div class="box selected-task-container">
+							<fieldset>
+								<legend>Name</legend>
+								<div class="box fieldset-content">
+									<div class="label">Selected:</div>
+									<div class="val">{selectedTask.expand.operation.name}</div>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>Formula</legend>
+								{#if selectedTask.expand.operation.formula != null}
+									<div class="box">
+										<div class="fieldset-content">
+											<div class="label">Action:</div>
+											<div class="val">{selectedTask.expand.operation.formula.action}</div>
+										</div>
+										<div class="fieldset-content">
+											<div class="label">Repeat:</div>
+											<div class="val">{selectedTask.expand.operation.formula.times}</div>
+										</div>
+									</div>
+								{:else}
+									<div class="box"><Message type="warning" title="No formula" message="There no formula for this task" spaceY={false} action="null" /></div>
+								{/if}
+							</fieldset>
+						</div>
+					{/if}
 				{:else if $schedule_editor_subNav_item == 'properties'}
 					<div class="box-inset"><ScheduleProperties /></div>
 				{:else if $schedule_editor_subNav_item == 'parameters'}
@@ -53,6 +83,16 @@
 </div>
 
 <style>
+	.fieldset-content {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: row;
+		gap: var(--site-gap-flex);
+	}
+	:global(.selected-task-container) {
+		margin: var(--site-gap-flex) auto;
+	}
 	:global(.text-warning, .text-success) {
 		font-size: 1.25rem;
 	}
@@ -86,7 +126,6 @@
 		max-width: 650px;
 		min-width: 300px;
 		margin: 0px auto;
-		/* max-width: 130px; */
 		gap: 10px;
 	}
 	.controls-and-filter-container {

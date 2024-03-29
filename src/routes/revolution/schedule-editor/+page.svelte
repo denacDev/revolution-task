@@ -69,13 +69,26 @@
 
 <div class="content container-fluid fill-height">
 	{#if dataIsLoading == true}
-		<p>loading data..</p>
+		<div class="center-of-page">
+			<img src="https://media1.tenor.com/m/-n8JvVIqBXkAAAAC/dddd.gif" alt="spinner" width="50px" />
+			<div>loading data..</div>
+		</div>
 	{:else}
 		<Explorer data={$allSchedules} />
 	{/if}
 </div>
 
 <style>
-	@media (max-width: 576px) {
+	.content {
+		position: relative;
+	}
+	.center-of-page {
+		display: flex;
+
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		gap: var(--site-gap-flex);
+		height: 100vh;
 	}
 </style>

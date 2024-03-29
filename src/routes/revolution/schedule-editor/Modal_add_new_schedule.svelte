@@ -11,6 +11,7 @@
 	let newScheduleName = '';
 
 	const handleAddSchedule = async (e) => {
+		// check if there are less than 3 characters
 		let scheduleInputElement = document.getElementById('new-schedule-input');
 		if (newScheduleName.length > 3) {
 			// remove error border if it has one
@@ -83,17 +84,14 @@
 					<div class="box active-control">
 						<div class="val">
 							<input type="text" placeholder="Schedule Name" id="new-schedule-input" bind:value={newScheduleName} />
-							<!-- <i class="bi bi-plus-square-fill filter-schedule-icon" class:control-icon-disabled={newScheduleName == ''} title="New Schedule"></i> -->
 						</div>
 					</div>
 					<button
 						on:click={(e) => {
 							handleAddSchedule(e);
-							// ;
 						}}
 						class=" btn btn-primary btn-sm"
 						title="Remove player from the list">ADD</button>
-					<!-- <button class="btn-custom-width-text" on:click={handleAddSchedule}>ADD</button> -->
 				</main>
 			</div>
 		</div>

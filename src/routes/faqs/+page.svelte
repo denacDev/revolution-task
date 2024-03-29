@@ -15,10 +15,10 @@
 			</h2>
 			<div id="installRevolution" class="accordion-collapse collapse" data-bs-parent="#faqs">
 				<div class="accordion-body">
-					<p><strong>1. Install a database</strong> - Revolution requires Mongo DB. Mongo DB stores data from runs and also data regarding plate barcodes and plate locations. Download from <a href="https://www.mongodb.org/dl/win32/">here</a>.</p>
-					<p><strong>2. Execute the <i>installservice.bat</i></strong> - found in the installation path of MongoDB.</p>
-					<p><strong>3. Reboot the computer</strong> - Rebooting the computer, ensures that the MongoDB service will start properly(recomended to check).</p>
-					<p><strong>4. Install Revolution</strong> - UK Robotics will provide the installer.</p>
+					<p class="box"><strong>1. Install a database</strong> - Revolution requires Mongo DB. Mongo DB stores data from runs and also data regarding plate barcodes and plate locations. Download from <a href="https://www.mongodb.org/dl/win32/">here</a>.</p>
+					<p class="box"><strong>2. Execute the <i>installservice.bat</i></strong> - found in the installation path of MongoDB.</p>
+					<p class="box"><strong>3. Reboot the computer</strong> - Rebooting the computer, ensures that the MongoDB service will start properly(recomended to check).</p>
+					<p class="box"><strong>4. Install Revolution</strong> - UK Robotics will provide the installer.</p>
 				</div>
 			</div>
 		</div>
@@ -38,42 +38,12 @@
 
 <style>
 	.accordion-button {
-		color: rgb(5, 147, 26);
+		color: var(--bs-success);
 	}
 	.img-show {
 		max-width: 500px;
 		width: 500px;
 		display: block;
 		margin: 10px auto;
-	}
-	.content {
-		padding: 10px;
-		max-width: 700px;
-		width: 100%;
-		margin: 0px auto;
-	}
-
-	.card-img-top {
-		max-width: 320px;
-	}
-	.product-details {
-		text-align: left;
-	}
-	.content {
-		font-family:
-			'Jost',
-			-apple-system,
-			blinkmacsystemfont,
-			'Segoe UI',
-			roboto,
-			'Helvetica Neue',
-			arial,
-			'Noto Sans',
-			sans-serif,
-			'Apple Color Emoji',
-			'Segoe UI Emoji',
-			'Segoe UI Symbol',
-			'Noto Color Emoji';
-		font-size: 1.2rem;
 	}
 </style>

@@ -36,14 +36,14 @@
 
 <style>
 	.my-0 {
-		color: rgb(5, 147, 26);
+		color: var(--bs-success);
 	}
-	.content {
+	/* .content {
 		padding: 10px;
 		max-width: 700px;
 		width: 100%;
 		margin: 0px auto;
-	}
+	} */
 	.cards {
 		display: flex;
 		flex-direction: column;
@@ -55,27 +55,5 @@
 	}
 	.product-details {
 		text-align: left;
-	}
-	.content li {
-		font-family:
-			'Jost',
-			-apple-system,
-			blinkmacsystemfont,
-			'Segoe UI',
-			roboto,
-			'Helvetica Neue',
-			arial,
-			'Noto Sans',
-			sans-serif,
-			'Apple Color Emoji',
-			'Segoe UI Emoji',
-			'Segoe UI Symbol',
-			'Noto Color Emoji';
-		font-size: 1.2rem;
-	}
-	.content p {
-		border: 1px solid black;
-		display: block;
-		padding: 10px;
 	}
 </style>

@@ -1,17 +1,11 @@
 <script>
 	import { allSchedules } from '$lib/stores/databaseStores';
-	import { onMount } from 'svelte';
 
 	let filterValue = '';
 	let temp = $allSchedules;
-	onMount(() => {
-		// let temp =
-	});
-	const handleFilterValue = () => {
-		console.log('filterValue :>> ', filterValue);
 
+	const handleFilterValue = () => {
 		$allSchedules = $allSchedules.filter((item) => new RegExp('^' + filterValue.replace(/\*/g, '.*')).test(item.name));
-		console.log('$allSchedules :>> ', $allSchedules);
 		if ($allSchedules.length == 0) {
 			$allSchedules = temp;
 		}
@@ -26,13 +20,10 @@
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 
 	<input type="text" placeholder="Search Schedule" id="filter-schedule-input" bind:value={filterValue} on:input={handleFilterValue} />
-	<!-- <i class="bi bi-funnel-fill filter-schedule-icon" class:control-icon-disabled={filterValue == ''} title="New Schedule"></i> -->
 </div>
 
 <style>
 	.filter-container {
-		/* border: 1px solid black; */
-
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -46,31 +37,6 @@
 		gap: 10px;
 		max-width: 100%;
 		width: 100%;
-	}
-	.bi {
-		font-size: 1.5rem;
-		text-shadow: 0px 0px 1px white;
-		transition: all 0.3s ease;
-	}
-	.bi:hover {
-		scale: 1.1;
-		cursor: pointer;
-	}
-
-	.control-icon-disabled {
-		color: gray !important;
-		cursor: not-allowed !important;
-		scale: 1 !important;
-	}
-	/* filter icon */
-	.filter-schedule-icon {
-		color: rgb(0, 136, 255);
-		cursor: pointer;
-	}
-	/* remove icon */
-	.remove-schedule-icon {
-		color: red;
-		cursor: pointer;
 	}
 
 	/* fileter input */

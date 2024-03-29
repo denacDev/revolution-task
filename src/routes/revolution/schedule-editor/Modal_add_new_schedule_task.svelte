@@ -45,9 +45,6 @@
 			</div>
 			<div class="body">
 				<main class="modal-content">
-					<!-- 
-						ADD DATA HERE
-					 -->
 					<div class="box operations-container">
 						{#await getAllOperations()}
 							loading operations
@@ -70,7 +67,6 @@
 						{:catch error}
 							error loading operations:: {error}
 						{/await}
-						<!-- <input type="text" placeholder="Schedule Name" id="new-schedule-input" bind:value={newOperationName} /> -->
 						<!-- <i class="bi bi-plus-square-fill filter-schedule-icon" class:control-icon-disabled={newOperationName == ''} title="New Schedule"></i> -->
 					</div>
 					<button
@@ -80,7 +76,6 @@
 						}}
 						class=" btn btn-primary btn-sm"
 						title="Remove player from the list">ADD</button>
-					<!-- <button class="btn-custom-width-text" on:click={handleAddSchedule}>ADD</button> -->
 				</main>
 			</div>
 		</div>

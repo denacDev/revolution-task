@@ -9,6 +9,7 @@
 	import { allOperationsForSelectedSchedule } from '$lib/stores/databaseStores';
 	let listIsExpanded = false;
 	let tasksAreLoaded = false;
+	export let selectedTask = undefined;
 
 	const createData = (e) => {
 		if ($allOperationsForSelectedSchedule?.length > 0) {
@@ -71,36 +72,55 @@
 {:else if tasksAreLoaded == true && $allOperationsForSelectedSchedule.length == 0}
 	<Message type="warning" title="No tasks" message="There are no tasks for this schedule yet!" spaceY={false} action="null" />
 {:else}
-	<div class="tasks-container" class:expanded-tasks={listIsExpanded == true}>
+	<div class="box-inset tasks-container" class:expanded-tasks={listIsExpanded == true}>
 		{#each $allOperationsForSelectedSchedule as task, currentIndex}
-			<TaskBadge {task} {currentIndex} count={$allOperationsForSelectedSchedule.length} />
+			<TaskBadge bind:selectedTask {task} {currentIndex} count={$allOperationsForSelectedSchedule.length} />
 		{/each}
 	</div>
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	{#if listIsExpanded == false}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<i
-			class="expand-list-icon bi bi-arrows-angle-expand"
-			style="font-size: 1rem;"
-			on:click={() => {
-				listIsExpanded = true;
-			}}></i>
-	{:else}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="tasks-browser-controls">
+		<div class="expand-icon a-custom-simple-button">
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			{#if listIsExpanded == false}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<i
+					class="expand-list-icon bi bi-arrows-angle-expand t"
+					on:click={() => {
+						listIsExpanded = true;
+					}}></i>
+			{:else}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
 
-		<i
-			class="expand-list-icon bi bi-arrows-angle-contract"
-			style="font-size: 1rem;"
-			on:click={() => {
-				listIsExpanded = false;
-			}}></i>
-	{/if}
+				<i
+					class="expand-list-icon bi bi-arrows-angle-contract"
+					on:click={() => {
+						listIsExpanded = false;
+					}}></i>
+			{/if}
+		</div>
+	</div>
 {/if}
 
 <style>
+	.tasks-browser-controls {
+		margin: 5px 0px;
+		display: flex;
+		justify-content: flex-end;
+		align-self: baseline;
+	}
+	@media (max-width: 576px) {
+		.tasks-browser-controls {
+			align-items: center;
+			align-self: inherit;
+		}
+	}
+	.expand-list-icon {
+		padding: 10px;
+	}
 	.expand-list-icon {
 		height: min-content;
 		width: min-content;
+		justify-self: flex-end;
+		font-size: 1rem;
 	}
 	.expanded-tasks {
 		max-height: 100% !important;
@@ -114,7 +134,6 @@
 		max-height: 150px;
 		height: 100%;
 		overflow-y: scroll;
-		/* border: 1px solid black; */
 		align-items: stretch;
 		width: 100%;
 	}

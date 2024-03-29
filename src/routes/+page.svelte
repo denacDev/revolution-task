@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Register - {PUBLIC_APP_NAME}</title>
+	<title>Home page - {PUBLIC_APP_NAME}</title>
 </svelte:head>
 
 <div class="content">

@@ -47,25 +47,10 @@
 		margin: 0 !important;
 		padding: 0 !important;
 	}
-	.content {
-		max-width: 700px;
-		width: 100%;
-		margin: 0px auto;
-		padding: 10px;
-		display: flex;
-		flex-direction: column;
-	}
+
 	.fields {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
-	}
-	form {
-		margin: 0px auto;
-		max-width: 330px;
-		padding: 1rem;
-		display: flex;
-		flex-direction: column;
-		gap: 30px;
 	}
 </style>

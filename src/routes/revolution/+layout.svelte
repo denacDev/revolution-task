@@ -1,7 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	console.log('$page :>> ', $page);
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import SideMainNavigation from '$lib/components/AppSideMainNavigation.svelte';
 	import Message from '$lib/addons/Message.svelte';

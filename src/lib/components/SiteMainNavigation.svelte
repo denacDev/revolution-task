@@ -9,13 +9,16 @@
 	};
 </script>
 
-<!-- <span class="fs-4"> <a href={$page.url.origin}><img src={logoSmall} alt="Revolution logo" width="40" /></a> </span> -->
-
 <nav id="site-main-navigation">
 	<span class="fs-4"> <a href={$page.url.origin}><img src={logo} alt="Revolution logo" width="80" /></a> </span>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<i class="bi bi-list" id="menu-icon" on:click={handleSideMenuClose}></i>
+	{#if menuOpen == true}
+		<i class="bi bi-x" id="menu-icon" on:click={handleSideMenuClose}></i>
+	{:else}
+		<i class="bi bi-list" id="menu-icon" on:click={handleSideMenuClose}></i>
+		<!-- else content here -->
+	{/if}
 	<div class="container d-flex flex-wrap">
 		<ul class="nav me-auto" class:nav-active={menuOpen == true}>
 			<li class="nav-item"><a href="/" class:active={$page.route.id === '/'} class="nav-link link-body-emphasis px-2" aria-current="page">Home</a></li>
@@ -50,22 +53,27 @@
 		width: max-content;
 	}
 
-	.active {
-		background-color: #e9ecef;
-	}
 	#menu-icon {
 		display: none;
 		font-size: 1.5rem;
 		cursor: pointer;
 	}
+	.nav-link {
+		border: none !important;
+	}
 
-	@media (max-width: 320px) {
+	@media (max-width: 640px) {
 		#menu-icon {
 			display: block;
 		}
 		.nav-item {
 			width: 100%;
 			text-align: center;
+		}
+
+		.nav-link {
+			border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+			border-left: none !important;
 		}
 		.nav-item:hover {
 			background-color: #e9ecef;

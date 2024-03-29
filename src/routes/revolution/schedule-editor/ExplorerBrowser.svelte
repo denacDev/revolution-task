@@ -6,7 +6,6 @@
 	export let selectedSchedule = undefined;
 
 	//
-	console.log('schedules :>> ', schedules);
 
 	const removeSchedule = (schedule) => {
 		openModal(ModalRemoveSchedule, {
@@ -78,19 +77,13 @@
 
 <style>
 	.top {
-		/* border: 1px solid black; */
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
 		gap: 0px;
 	}
-	.top-left {
-		/* border: 1px solid black; */
-	}
-	.top-right {
-		/* border: 1px solid black; */
-	}
+
 	.bottom {
 		display: flex;
 		flex-direction: row;
@@ -101,28 +94,18 @@
 	.bottom div {
 		font-size: xx-small !important;
 		color: var(--bs-secondary-color);
-
-		/* border: 1px solid black; */
 	}
 
-	:global(li.active) {
-		background-color: rgba(0, 128, 0, 0.1) !important;
-		color: green !important;
-		border: 1px solid rgba(0, 128, 0, 0.153) !important;
-	}
 	.list-group {
-		/* padding: 10px; */
 		max-height: 150px;
 		overflow-y: scroll;
-		/* box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.342); */
-		/* background-color: rgba(0, 0, 0, 0.049); */
 	}
 	.list-group-item {
-		color: green;
+		color: var(--bs-teal);
 		padding: 0.2rem var(--bs-list-group-item-padding-x);
 	}
 	.list-group-item:hover {
-		color: green;
+		color: var(--bs-teal);
 		background-color: rgba(0, 128, 0, 0.1);
 	}
 	:global(li.disabled) {
@@ -145,15 +128,6 @@
 	}
 	.bi:hover {
 		scale: 1.1;
-		cursor: pointer;
-	}
-	/* remove icon */
-	.remove-schedule-icon {
-		color: gray;
-		cursor: pointer;
-	}
-	.remove-schedule-icon:hover {
-		color: red;
 		cursor: pointer;
 	}
 </style>
