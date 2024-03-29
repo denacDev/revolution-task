@@ -22,10 +22,12 @@
 			let frmData = new FormData();
 			frmData.append('name', newScheduleName);
 			let returnedData = await sendRequest('?/add_new_schedule', 'POST', {}, frmData);
-			let res = jsonToObj(returnedData);
-			addNotification(res.msg, res.type, res.time);
-			closeModal();
-			newScheduleName = '';
+			if (returnedData != undefined) {
+				let res = jsonToObj(returnedData);
+				addNotification(res.msg, res.type, res.time);
+				closeModal();
+				newScheduleName = '';
+			}
 		} else {
 			scheduleInputElement.focus();
 			scheduleInputElement.classList.add('border-danger');
