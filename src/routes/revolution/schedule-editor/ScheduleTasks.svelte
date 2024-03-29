@@ -38,7 +38,7 @@
 </div>
 
 <style>
-	.tasks-container {
+	. .tasks-container {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -48,7 +48,8 @@
 	.tasks-controls {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: flex-start;
+
 		gap: var(--site-gap-flex);
 	}
 	@media (max-width: 576px) {

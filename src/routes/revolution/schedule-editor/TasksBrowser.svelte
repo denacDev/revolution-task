@@ -72,8 +72,8 @@
 	<Message type="warning" title="No tasks" message="There are no tasks for this schedule yet!" spaceY={false} action="null" />
 {:else}
 	<div class="tasks-container" class:expanded-tasks={listIsExpanded == true}>
-		{#each invertArray($allOperationsForSelectedSchedule) as task}
-			<TaskBadge {task} />
+		{#each $allOperationsForSelectedSchedule as task, currentIndex}
+			<TaskBadge {task} {currentIndex} count={$allOperationsForSelectedSchedule.length} />
 		{/each}
 	</div>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->

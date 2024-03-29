@@ -33,4 +33,9 @@ export const removeTask = (taskId) => {
    let record = pb.collection('tasks_for_schedule').delete(taskId)
    return record
 }
+export const updateTaskPosition = async(taskid, data) => {
+   const record = await pb.collection('tasks_for_schedule').update('RECORD_ID', data);
+   return record
+   
+}
 
